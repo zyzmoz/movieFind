@@ -11,6 +11,8 @@ export class MoviesComponent implements OnInit {
 
   popularList  : Array<Object>;
   theaterList : Array<Object>;  
+  searchStr: string;
+  searchRes: Array<Object>;
 
   constructor(private _movieService: MovieService) { 
     this._movieService.getInTheaters()
@@ -27,6 +29,13 @@ export class MoviesComponent implements OnInit {
   }
 
   ngOnInit() {
+  }
+
+  searchMovies(){
+    this._movieService.searchMovies(this.searchStr)
+      .subscribe(res => {
+        this.searchRes = res.results;
+      });
   }
 
 }
